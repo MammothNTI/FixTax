@@ -24,8 +24,77 @@ body {
     background-image: url('bilder/grey.jpg');
   }
 }
+.CloseLogin {
+  transition: all 0.3s ease;
+  position: absolute;
+  right: 0;
+  border: none;
+  background-color: red;  
+  border-top: none;
+  border-right: none;
+  border: 3px solid black;
+  padding: 1px  5px;
+  border-radius: 8px;
+  font-size: 22px;
+}
+.LoginBtn {
+  transition: all 0.3s ease;
+  background-color: rgb(6, 224, 93);
+  border: 3px solid black;
+  border-radius: 8px;
+  padding: 5px  10px;
+}
+.LoginBtn2 {
+  transition: all 0.3s ease;
+  background-color: rgb(128, 128, 128);
+  border: 3px solid black;
+  border-radius: 8px;
+  padding: 5px  10px;
+}
 
-
+.LoginBtn:hover, .LoginBtn2:hover, .CloseLogin:hover {
+  transform: scale(1.06);
+}
+.LoginBtn:active, .LoginBtn2:active, .CloseLogin:active {
+  transform: scale(0.94);
+}
+.ErrorNotif {
+  position: absolute;
+  right: 50%;
+  top: 240px;
+  transform: translateX(50%);
+  opacity: 0%;
+  width: max-content;
+}
+.TogglePass {
+  background-image: url('bilder/HidePass.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  cursor: pointer; 
+  width: 20px; 
+  height: 20px;
+  transform: translateY(5px);
+  border: none;
+  background-color: transparent;
+}
+.LoginDis {
+  border-radius: 8px;
+  background-color: rgb(83, 101, 101);
+  width: max-content;
+  padding: 40px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 5px 30px 2px black;
+}
+.MainLoginBdy {
+  display: none;
+  position: absolute;
+  bottom: calc(50% - 150px);
+  transform: translateY(-50%);
+  left: 50%;
+  transform: translateX(-50%);
+}
   
 .site_name {
   margin-top: 30px;

@@ -13,7 +13,7 @@ function toggleColumnVisibility(Output) {
   else if (Output === "Wait") {
     Wait = true;
   }
-  else if (Output === "Close" && Wait){
+  else if (Output === "Close" && Wait) {
     Wait = false;
     discordIframe.style.display = "none";
   }
@@ -35,7 +35,7 @@ function openModal() {
   */
 }
 let Clicked = true;
- function ShowSpotifyCont(Btn) {
+function ShowSpotifyCont(Btn) {
   Clicked = !Clicked;
   const SPC = document.getElementById('spotifyContainer');
   if (Clicked) {
@@ -44,12 +44,115 @@ let Clicked = true;
   else {
     SPC.style.display = "block";
   }
- }
+}
+let Show = false;
+
+function ShowPasword(btn, tag) {
+  Show = !Show;
+  if (tag === '1') {
+
+    const passwordField = document.getElementById("LoginPassword");
+    const togglePasswordButton = document.getElementById("togglePassword");
+    if (!Show) {
+      btn.style.backgroundImage = "url('bilder/ShowPass.png')";
+      passwordField.type = "text";
+    } else {
+      btn.style.backgroundImage = "url('bilder/HidePass.png')";
+      passwordField.type = "password";
+      togglePasswordButton.textContent = "Show";
+    }
+  }
+  else {
+
+    const passwordField = document.getElementById("LoginPassword2");
+    const togglePasswordButton = document.getElementById("togglePassword");
+    if (Show) {
+      btn.style.backgroundImage = "url('bilder/ShowPass.png')";
+      passwordField.type = "text";
+    } else {
+      btn.style.backgroundImage = "url('bilder/HidePass.png')";
+      passwordField.type = "password";
+      togglePasswordButton.textContent = "Show";
+    }
+  }
+}
+
+function ShowLogin(Special) {
+  const LoginBdy = document.getElementById("MainLoginBdy");
+  Show = !Show;
+
+  if (Show) {
+    LoginBdy.style.display = "block";
+  }
+  else {
+    LoginBdy.style.display = "none";
+  }
+
+  if (Special === "CreateNew") {
+    document.getElementById("MainLoginBdy2").style.display = "block";
+  }
+  if (Special === "CloseNew") {
+    Show = !Show;
+    document.getElementById("MainLoginBdy2").style.display = "none";
+    LoginBdy.style.display = "none";
+  }
+}
+
+function Login() {
+}
+let Username = "";
+let password = "";
+
+function CreateAccount(Special) {
+
+  if (!Special) {
+    const Usnm = document.getElementById("Usrn").value;
+    const Pswr = document.getElementById("LoginPassword2").value;
+    if (Usnm === Username) {
+      Notification("Username or password is already taken", "red", "1");
+    }
+    else {
+      Notification("Account Created", "green", "2");
+      password = Pswr;
+      Username = Usnm;
+    }
+  }
+  if (Special) {
+    const Usnm = document.getElementById("UsernameLogin").value;
+    const Pswr = document.getElementById("LoginPassword").value;
+    if (Usnm === Username && Pswr === password) {
+
+      Notification("Logad in", "green", "1");
+
+    }
+    else {
+      Notification("Felaktig Username eller password", "red", "1");
+    }
+  }
+}
+
+
+function loop() {
+  console.log(document.getElementById("Usrn").value + "  " + document.getElementById("LoginPassword2").value)
+  requestAnimationFrame(loop)
+}
+requestAnimationFrame(loop)
+
+
+function Notification(Message, color, id) {
+  const ErrorMessage = document.getElementById("ErrorNotif" + id);
+  ErrorMessage.innerText = Message;
+  ErrorMessage.style.color = color;
+  ErrorMessage.style.opacity = "100%";
+
+  setTimeout(function () {
+    ErrorMessage.style.opacity = "0%";
+  }, 2000);
+}
 
 
 function OpenTiktok() {
   const popupDiv = document.getElementById("OpenTiktok");
-
   if (close1) {
     popupDiv.style.display = "block";
   }
@@ -108,10 +211,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/submit_vote', (req, res) => {
   const { vote } = req.body;
 
-  
+
   votes[vote]++;
 
- 
+
   res.json(votes);
 });
 
