@@ -1,4 +1,9 @@
-let Wait = false;
+let Wait = false,
+ Username = "",
+ password = "",
+ LogedIn = false,
+Settings = false;
+
 
 function toggleColumnVisibility(Output) {
   var discordIframe = document.getElementById("discord-iframe");
@@ -20,8 +25,6 @@ function toggleColumnVisibility(Output) {
 }
 
 let close1 = false;
-
-
 function openModal() {
   var modal = document.getElementById("myModal");
   modal.style.display = "block";
@@ -77,9 +80,19 @@ function ShowPasword(btn, tag) {
   }
 }
 
+window.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("OnlyLoggedOut").style.display = "block";
+  document.getElementById("OnlyLoggedIn").style.display = "none";
+});
 function ShowLogin(Special) {
   const LoginBdy = document.getElementById("MainLoginBdy");
   Show = !Show;
+
+
+  document.getElementById("Usrn").value = "";
+  document.getElementById("LoginPassword2").value = "";
+  document.getElementById("UsernameLogin").value = "";
+  document.getElementById("LoginPassword").value = "";
 
   if (Show) {
     LoginBdy.style.display = "block";
@@ -97,47 +110,95 @@ function ShowLogin(Special) {
     LoginBdy.style.display = "none";
   }
 }
-
-function Login() {
-}
-let Username = "";
-let password = "";
-
 function CreateAccount(Special) {
 
-  if (!Special) {
+  if (Special === "") {
     const Usnm = document.getElementById("Usrn").value;
     const Pswr = document.getElementById("LoginPassword2").value;
-    if (Usnm === Username) {
-      Notification("Username or password is already taken", "red", "1");
+    if (Usnm === Username && Username != "") {
+      Notification("Användarnamn Eller Lösenord Är Upptagen", "red", "2");
+      document.getElementById("Usrn").value = "";
+      document.getElementById("LoginPassword2").value = "";
+    }
+    else if (Usnm === "") {
+      Notification("Vänligen Fyll I Rutorna", "orange", "2");
+      document.getElementById("Usrn").value = "";
+      document.getElementById("LoginPassword2").value = "";
+    }
+    else if (Pswr != "") {
+      if (Usnm.length < 20 && Usnm.length > 5 && Pswr.length < 25 && Pswr.length > 8) {
+        Notification("Konto Skapat!", "greenyellow", "2");
+        password = Pswr;
+        Username = Usnm;
+        ChangeAccountNmaeDis('')
+        LogedIn = true;
+        document.getElementById("OnlyLoggedOut").style.display = "none";
+        document.getElementById("OnlyLoggedIn").style.display = "block";
+      }
+      else if (Usnm.length > 20 | Pswr.length > 25) {
+        Notification("Användarnamnet Eller Lösenordet Är För Långt", "orange", "2");
+      }
+      else if (Usnm.length < 5 | Pswr.length < 8) {
+        Notification("Användarnamnet Eller Lösenordet Är För Kort", "orange", "2");
+      }
+
+
     }
     else {
-      Notification("Account Created", "green", "2");
-      password = Pswr;
-      Username = Usnm;
+      Notification("Något Gick Fel", "red", "2");
+      document.getElementById("Usrn").value = "";
+      document.getElementById("LoginPassword2").value = "";
     }
   }
-  if (Special) {
+  if (Special === "Work") {
     const Usnm = document.getElementById("UsernameLogin").value;
     const Pswr = document.getElementById("LoginPassword").value;
-    if (Usnm === Username && Pswr === password) {
+    if (Usnm === Username && Pswr === password && Usnm != "" && Pswr != "") {
 
-      Notification("Logad in", "green", "1");
-
+      Notification("Logad in", "greenyellow", "1");
+      ChangeAccountNmaeDis('')
+      LogedIn = true;
+      document.getElementById("OnlyLoggedOut").style.display = "none";
+      document.getElementById("OnlyLoggedIn").style.display = "block";
+    }
+    else if (Usnm === "" | Pswr === "") {
+      Notification("Vänligen Fyll I Rutorna", "orange", "1");
     }
     else {
-      Notification("Felaktig Username eller password", "red", "1");
+      Notification("Felaktig Användarnamn Eller Lösenord", "red", "1");
+      document.getElementById("UsernameLogin").value = "";
+      document.getElementById("LoginPassword").value = "";
+    }
+  }
+  if (Special === "Delete") {
+    if (!LogedIn) {
+      alert("Något gick fel")
+    }
+    else {
+      password = "";
+      Username = "";
+      ChangeAccountNmaeDis('delete');
+      LogedIn = false;
+      document.getElementById("OnlyLoggedOut").style.display = "block";
+      document.getElementById("OnlyLoggedIn").style.display = "none";
     }
   }
 }
 
 
-function loop() {
-  console.log(document.getElementById("Usrn").value + "  " + document.getElementById("LoginPassword2").value)
-  requestAnimationFrame(loop)
-}
-requestAnimationFrame(loop)
+function ChangeAccountNmaeDis(tag) {
+  if (tag === '') {
+    const d = new Date();
+    DateCreated = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear()
+    document.getElementById("UsernameDis").innerText = Username;
+    document.getElementById("KontoTimeDis").innerText = DateCreated;
+  }
 
+  if (tag === "delete") {
+    document.getElementById("UsernameDis").innerText = "";
+    document.getElementById("KontoTimeDis").innerText = "";
+  }
+}
 
 function Notification(Message, color, id) {
   const ErrorMessage = document.getElementById("ErrorNotif" + id);
@@ -150,6 +211,19 @@ function Notification(Message, color, id) {
   }, 2000);
 }
 
+function ShowSettings() {
+
+  const MainSettings = document.getElementById("Settings");
+  Settings = !Settings;
+
+  if (Settings) {
+    MainSettings.style.display = "block";
+  }
+  else {
+    MainSettings.style.display = "none";
+  }
+
+}
 
 function OpenTiktok() {
   const popupDiv = document.getElementById("OpenTiktok");

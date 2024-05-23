@@ -6,22 +6,22 @@ document.addEventListener("DOMContentLoaded", function () {
     function addMessage(message) {
         const messageElement = document.createElement('div');
         messageElement.className = 'message';
-        messageElement.style.background = 'rgb(79, 79, 79)'; // Add black background
-        messageElement.style.padding = '10px'; // Add some padding
-        messageElement.style.margin = '10px'; // Add some margin between messages
-        messageElement.style.position = 'relative'; // To position the delete button correctly
+        messageElement.style.background = 'rgb(79, 79, 79)';
+        messageElement.style.padding = '10px';
+        messageElement.style.margin = '10px';
+        messageElement.style.position = 'relative';
         messageElement.style.maxWidth = '700px';
-        messageElement.style.borderRadius = "12px" // Set a maximum width
+        messageElement.style.borderRadius = "12px"
 
         const messageText = document.createElement('span');
         messageText.className = 'message-text';
         messageText.innerText = message;
         messageText.style.color = 'white';
-        messageText.style.whiteSpace = 'normal'; // Allow text to wrap to the next line
-        messageText.style.wordWrap = 'break-word'; // Ensure words are wrapped if they are too long
+        messageText.style.whiteSpace = 'normal';
+        messageText.style.wordWrap = 'break-word';
         messageText.style.display = 'inline-block';
         messageText.style.width = 'calc(100% - 40px)';
-        messageText.style.fontSize = "15px"; // Adjust width to account for padding and delete button
+        messageText.style.fontSize = "15px";
 
         const deleteButton = document.createElement('button');
         deleteButton.className = 'delete-button';
@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         chatBox.appendChild(messageElement);
     }
+
 
     function removeMessage(messageElement, message) {
         messageElement.remove();
@@ -82,3 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+function ClearAllMessages() {
+    const element = document.querySelectorAll("message");
+    element.remove()
+}
