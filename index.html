@@ -25,8 +25,9 @@
     <button class="CloseSettings" onclick="ShowSettings()">x</button>
     <div class="SettingsContent">
       <div>
-        <div class="SettingParts">
-          <div id="OnlyLoggedIn">
+        <div id="OnlyLoggedIn">
+          <div class="SettingParts">
+
             <h2>Konto</h2>
             <br>
             <div class="AccountContent">
@@ -42,11 +43,19 @@
               </div>
             </div>
             <br><br><br>
-            
+
             <button class="DelAccount" onclick="CreateAccount('Delete')">Radera Konto</button>
+
+          </div>
+          <br><br><br>
+          <div class="SettingParts">
+            <h2>Server Chatt</h2>
+            <br>
+            <div class="AccountContent">
+              <a href="freeChat.html"><button>Server Chatt</button></a>
+            </div>
           </div>
         </div>
-
 
         <div class="SettingParts">
           <div id="OnlyLoggedOut">
@@ -176,7 +185,8 @@
       <br><br>
       <h3>Lösenord</h3>
       <div class="Flex-Col"><input class="PasswordInput" id="LoginPassword" placeholder="Lösenord" type="password">
-        <button class="TogglePass" onclick="ShowPasword(this,'1')"></button></div>
+        <button class="TogglePass" onclick="ShowPasword(this,'1')"></button>
+      </div>
       <br><br>
       <p class="ErrorNotif1" id="ErrorNotif1"></p>
       <br>
@@ -200,7 +210,8 @@
       <br><br>
       <h3>Lösenord</h3>
       <div class="Flex-Col"><input class="PasswordInput" id="LoginPassword2" type="password" placeholder="Lösenord">
-        <button class="TogglePass" onclick="ShowPasword(this,'2')"></button></div>
+        <button class="TogglePass" onclick="ShowPasword(this,'2')"></button>
+      </div>
       <p>Max 25 Min 8</p>
       <br><br>
       <p class="ErrorNotif2" id="ErrorNotif2"></p>
